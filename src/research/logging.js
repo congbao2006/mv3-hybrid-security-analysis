@@ -1,9 +1,13 @@
 import { execFileSync } from 'node:child_process';
 import os from 'node:os';
+import path from 'node:path';
 import process from 'node:process';
+import { fileURLToPath } from 'node:url';
 import { MvxError } from '../errors.js';
 import { assertOptionsObject } from '../options.js';
 import { VERSION } from '../version.js';
+
+const PACKAGE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 export const LOGGING_SCHEMA_VERSION = 1;
 export const LOGGING_PROFILE = 'mvx-research-observability-v1';
@@ -160,7 +164,7 @@ function safeExec(command, args, { cwd = process.cwd(), timeout = 2_000 } = {}) 
   }
 }
 
-export function probeGitStatus(cwd = process.cwd()) {
+export function probeGitStatus(cwd = PACKAGE_ROOT) {
   const commitProbe = safeExec('git', ['rev-parse', 'HEAD'], { cwd });
   const commit = commitProbe.ok && /^[a-f0-9]{40}$/.test(commitProbe.output)
     ? commitProbe.output
@@ -247,7 +251,7 @@ export function probeDockerEnvironment({ imageReference = null, probeRuntime = t
 export function collectExtendedEnvironmentMetadata(overrides = {}, options = {}) {
   assertOptionsObject(overrides, 'Environment metadata');
   assertOptionsObject(options, 'Environment probe options');
-  const cwd = options.cwd ?? process.cwd();
+  const cwd = options.cwd ?? PACKAGE_ROOT;
   const skipExternalProbes = options.skipExternalProbes === true;
   const requiresDocker = options.requiresDocker === true;
   const imageReference = options.imageReference ?? null;
@@ -341,8 +345,9 @@ export function formatProgressEventText(event) {
       event.repeatIndex ? `#r${event.repeatIndex}` : ''
     ].join('');
     const cached = event.resumedFromCache ? ' (cached)' : '';
+    const shared = event.sharedAnalysisPass === true && event.primaryWeightPass === false ? ' (shared-pass)' : '';
     const dur = typeof event.durationMs === 'number' ? ` ${event.durationMs}ms` : '';
-    return `[${ts}]   METHOD [${event.sampleIndex}/${event.totalSamples}] sample=${event.sampleId} ${detail} status=${event.status}${cached}${dur}${counts}\n`;
+    return `[${ts}]   METHOD [${event.sampleIndex}/${event.totalSamples}] sample=${event.sampleId} ${detail} status=${event.status}${cached}${shared}${dur}${counts}\n`;
   }
   if (event.event === 'sample.completed') {
     return `[${ts}] SAMPLE [${event.sampleIndex}/${event.totalSamples}] DONE sample=${event.sampleId}${counts}\n`;
@@ -354,4 +359,55 @@ export function formatProgressEventText(event) {
     return `[${ts}] DONE experiment=${event.experimentId} lifecycle=${event.lifecycleState ?? 'completed'} records=${event.totalRunRecords ?? 0}${counts}\n`;
   }
   return `[${ts}] ${event.event}\n`;
+}
+
+export function computeRecordBreakdown(records, manifestSampleCount = null) {
+  const uniqueSamples = new Set();
+  const uniqueM1Passes = new Set();
+  const uniqueM2Passes = new Set();
+  const weightProfileEvaluations = { M1: 0, M2: 0, M4: 0 };
+  const dynamicM3Executions = { primary: 0, repeated: 0, auxiliaryDependency: 0 };
+  const nonExecutedPlaceholderRecords = { skipped: 0, failedIntake: 0 };
+
+  for (const record of records) {
+    if (record.sampleId) uniqueSamples.add(record.sampleId);
+    const isSkipped = record.status === 'skipped';
+    const isIntakeFail = record.status === 'failed'
+      && (record.failure?.stage === 'intake' || String(record.runId ?? '').endsWith(':intake-failed'));
+
+    if (isSkipped) {
+      nonExecutedPlaceholderRecords.skipped += 1;
+      continue;
+    }
+    if (isIntakeFail) {
+      nonExecutedPlaceholderRecords.failedIntake += 1;
+      continue;
+    }
+
+    if (record.method === 'M1') {
+      uniqueM1Passes.add(record.sampleId);
+      weightProfileEvaluations.M1 += 1;
+    } else if (record.method === 'M2') {
+      uniqueM2Passes.add(record.sampleId);
+      weightProfileEvaluations.M2 += 1;
+    } else if (record.method === 'M4') {
+      weightProfileEvaluations.M4 += 1;
+    } else if (record.method === 'M3') {
+      if ((record.repeatIndex ?? 1) === 1) dynamicM3Executions.primary += 1;
+      else dynamicM3Executions.repeated += 1;
+      if (record.auxiliaryDependency === true) dynamicM3Executions.auxiliaryDependency += 1;
+    }
+  }
+
+  return Object.freeze({
+    independentSamplesInManifest: manifestSampleCount ?? uniqueSamples.size,
+    observedUniqueSamples: uniqueSamples.size,
+    uniqueStaticAnalysisPasses: Object.freeze({
+      M1: uniqueM1Passes.size,
+      M2: uniqueM2Passes.size
+    }),
+    weightProfileEvaluations: Object.freeze(weightProfileEvaluations),
+    dynamicM3Executions: Object.freeze(dynamicM3Executions),
+    nonExecutedPlaceholderRecords: Object.freeze(nonExecutedPlaceholderRecords)
+  });
 }

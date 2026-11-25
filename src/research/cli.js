@@ -28,7 +28,7 @@ import {
   verifyExperimentProvenance
 } from './experiment-runner.js';
 import { validateFusionConfig } from './hybrid-fusion.js';
-import { formatProgressEventText, redactSensitiveText } from './logging.js';
+import { computeRecordBreakdown, formatProgressEventText, redactSensitiveText } from './logging.js';
 import {
   evaluateExperimentAgainstGroundTruth,
   loadGroundTruth
@@ -1633,6 +1633,7 @@ async function handleInspect(args, options, streams) {
   const sampleIds = new Set();
   let containmentViolations = 0;
   let artifactsChecked = 0;
+  let missingArtifacts = 0;
   let artifactHashMismatches = 0;
   let artifactMetadataMismatches = 0;
 
@@ -1651,11 +1652,14 @@ async function handleInspect(args, options, streams) {
       try {
         const text = await readFile(path.resolve(loaded.root, record.artifact.path), 'utf8');
         if (sha256(text) !== record.artifact.sha256) artifactHashMismatches += 1;
-      } catch {
-        artifactHashMismatches += 1;
+      } catch (error) {
+        if (error?.code === 'ENOENT') missingArtifacts += 1;
+        else artifactHashMismatches += 1;
       }
     }
   }
+
+  const recordBreakdown = computeRecordBreakdown(loaded.records, loaded.runManifest.sampleCount);
 
   const stabilityPath = path.join(loaded.root, 'stability_summary.json');
   const stabilityAvailable = loaded.stabilityFile !== null;
@@ -1706,6 +1710,7 @@ async function handleInspect(args, options, streams) {
     runs: {
       totalRecords: loaded.records.length,
       statusDistribution,
+      recordBreakdown,
       failedCount: statusDistribution.failed,
       inconclusiveCount: statusDistribution.inconclusive,
       failureCodes,
@@ -1714,11 +1719,15 @@ async function handleInspect(args, options, streams) {
       haltReason: loaded.summary?.haltReason ?? loaded.runManifest.haltReason ?? null
     },
     provenanceValidation: {
-      valid: loaded.provenance.valid && artifactHashMismatches === 0 && artifactMetadataMismatches === 0,
+      valid: loaded.provenance.valid
+        && missingArtifacts === 0
+        && artifactHashMismatches === 0
+        && artifactMetadataMismatches === 0,
       recordCount: loaded.provenance.recordCount,
       uniqueRunIds: loaded.provenance.uniqueRunIds,
       uniqueSamplesWithHash: loaded.provenance.uniqueSamplesWithHash,
       artifactsChecked,
+      missingArtifacts,
       artifactHashMismatches,
       artifactMetadataMismatches
     },
@@ -1744,8 +1753,9 @@ async function handleInspect(args, options, streams) {
     `Dataset: ${inspection.dataset.datasetVersion} (${inspection.dataset.observedSampleCount}/${inspection.dataset.manifestSampleCount} samples observed)`,
     `Methods: ${inspection.configuration.methods.join(', ')} | Weights: ${inspection.configuration.weightProfiles.join(', ')}`,
     `Run statuses: completed=${statusDistribution.completed}, fallback=${statusDistribution.completed_with_static_fallback}, inconclusive=${statusDistribution.inconclusive}, failed=${statusDistribution.failed}, skipped=${statusDistribution.skipped}`,
+    `Record breakdown: uniqueStaticPasses(M1=${recordBreakdown.uniqueStaticAnalysisPasses.M1}, M2=${recordBreakdown.uniqueStaticAnalysisPasses.M2}) | weightEvals(M1=${recordBreakdown.weightProfileEvaluations.M1}, M2=${recordBreakdown.weightProfileEvaluations.M2}, M4=${recordBreakdown.weightProfileEvaluations.M4}) | M3(primary=${recordBreakdown.dynamicM3Executions.primary}, repeated=${recordBreakdown.dynamicM3Executions.repeated}) | placeholders(skipped=${recordBreakdown.nonExecutedPlaceholderRecords.skipped}, failedIntake=${recordBreakdown.nonExecutedPlaceholderRecords.failedIntake})`,
     `Containment violations: ${containmentViolations}`,
-    `Provenance: ${inspection.provenanceValidation.valid ? 'VALID' : 'INVALID'} (${artifactsChecked} artifacts checked, ${artifactHashMismatches} hash mismatches, ${artifactMetadataMismatches} metadata mismatches)`,
+    `Provenance: ${inspection.provenanceValidation.valid ? 'VALID' : 'INVALID'} (${artifactsChecked} artifacts checked, ${missingArtifacts} missing, ${artifactHashMismatches} hash mismatches, ${artifactMetadataMismatches} metadata mismatches)`,
     `Stability summary: ${stabilityAvailable ? `available (${stabilityPath})` : 'not present'}`,
     `Export location: ${exportLocation.path} (${exportLocation.exists ? 'present' : 'not found'})`,
     `Evaluation location: ${evaluationLocation.path} (${evaluationLocation.exists ? 'present' : 'not found'}; Ground Truth labels not loaded)`

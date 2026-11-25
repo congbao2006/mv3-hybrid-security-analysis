@@ -17,6 +17,7 @@ import { RESEARCH_CONFIG_VERSION } from './config.js';
 import { fuseHybridEvidence, validateFusionConfig } from './hybrid-fusion.js';
 import {
   collectExtendedEnvironmentMetadata,
+  computeRecordBreakdown,
   createProgressEvent,
   normalizeStructuredFailure
 } from './logging.js';
@@ -868,12 +869,18 @@ export async function runExperimentBatch(options = {}) {
               });
               continue;
             }
+            const scoreStart = performance.now();
             const summaryForWeight = m1BaseResult.status === 'completed'
               ? m1BaseResult.scoresByWeight[weightProfile]
               : null;
             const artifactPayload = m1BaseResult.status === 'completed'
               ? { ...m1BaseResult, summary: summaryForWeight, researchConfig: { ...m1BaseResult.researchConfig, weightProfile } }
               : m1BaseResult;
+            const scoringDurationMs = Number((performance.now() - scoreStart).toFixed(3));
+            const analysisDurationMs = m1BaseResult.runtimeMs ?? 0;
+            const totalDurationMs = Number((analysisDurationMs + scoringDurationMs).toFixed(3));
+            const sharedAnalysisPass = uniqueWeights.length > 1;
+            const primaryWeightPass = weightProfile === uniqueWeights[0];
             await writeRecordAndArtifact({
               experimentId: options.experimentId,
               runId,
@@ -890,7 +897,13 @@ export async function runExperimentBatch(options = {}) {
               mvxVersion: VERSION,
               mvxBaseCommit: envMetadata.mvxBaseCommit,
               timestampUtc: new Date().toISOString(),
-              durationMs: m1BaseResult.runtimeMs ?? 0,
+              durationMs: analysisDurationMs,
+              analysisDurationMs,
+              scoringDurationMs,
+              totalDurationMs,
+              sharedAnalysisPass,
+              primaryWeightPass,
+              auxiliaryDependency: false,
               environment: envMetadata,
               status: m1BaseResult.status,
               verdict: null,
@@ -906,7 +919,12 @@ export async function runExperimentBatch(options = {}) {
               repeatIndex: null,
               status: m1BaseResult.status,
               verdict: null,
-              durationMs: m1BaseResult.runtimeMs ?? 0,
+              durationMs: analysisDurationMs,
+              analysisDurationMs,
+              scoringDurationMs,
+              totalDurationMs,
+              sharedAnalysisPass,
+              primaryWeightPass,
               resumedFromCache: false
             });
           }
@@ -964,12 +982,18 @@ export async function runExperimentBatch(options = {}) {
               });
               continue;
             }
+            const scoreStart = performance.now();
             const summaryForWeight = m2BaseResult.status === 'completed'
               ? m2BaseResult.scoresByWeight[weightProfile]
               : null;
             const artifactPayload = m2BaseResult.status === 'completed'
               ? { ...m2BaseResult, summary: summaryForWeight, researchConfig: { ...m2BaseResult.researchConfig, weightProfile } }
               : m2BaseResult;
+            const scoringDurationMs = Number((performance.now() - scoreStart).toFixed(3));
+            const analysisDurationMs = m2BaseResult.runtimeMs ?? 0;
+            const totalDurationMs = Number((analysisDurationMs + scoringDurationMs).toFixed(3));
+            const sharedAnalysisPass = uniqueWeights.length > 1;
+            const primaryWeightPass = weightProfile === uniqueWeights[0];
             await writeRecordAndArtifact({
               experimentId: options.experimentId,
               runId,
@@ -986,7 +1010,13 @@ export async function runExperimentBatch(options = {}) {
               mvxVersion: VERSION,
               mvxBaseCommit: envMetadata.mvxBaseCommit,
               timestampUtc: new Date().toISOString(),
-              durationMs: m2BaseResult.runtimeMs ?? 0,
+              durationMs: analysisDurationMs,
+              analysisDurationMs,
+              scoringDurationMs,
+              totalDurationMs,
+              sharedAnalysisPass,
+              primaryWeightPass,
+              auxiliaryDependency: false,
               environment: envMetadata,
               status: m2BaseResult.status,
               verdict: null,
@@ -1002,7 +1032,12 @@ export async function runExperimentBatch(options = {}) {
               repeatIndex: null,
               status: m2BaseResult.status,
               verdict: null,
-              durationMs: m2BaseResult.runtimeMs ?? 0,
+              durationMs: analysisDurationMs,
+              analysisDurationMs,
+              scoringDurationMs,
+              totalDurationMs,
+              sharedAnalysisPass,
+              primaryWeightPass,
               resumedFromCache: false
             });
           }
@@ -1045,6 +1080,30 @@ export async function runExperimentBatch(options = {}) {
               labRunner: m3Options.labRunner,
               captureFailures: true
             });
+            const obsImageId = typeof m3Result?.provenance?.imageId === 'string' && m3Result.provenance.imageId.length > 0
+              ? m3Result.provenance.imageId
+              : null;
+            const obsBrowserVer = m3Result?.provenance?.browser?.version
+              ?? (typeof m3Result?.provenance?.browser === 'string' ? m3Result.provenance.browser : null);
+            const m3RecordEnv = (obsImageId || obsBrowserVer)
+              ? {
+                ...envMetadata,
+                docker: {
+                  ...envMetadata.docker,
+                  imageId: envMetadata.docker?.imageId ?? obsImageId
+                },
+                chromium: obsBrowserVer
+                  ? {
+                    status: 'available',
+                    version: obsBrowserVer,
+                    source: 'lab_runtime',
+                    reason: null
+                  }
+                  : envMetadata.chromium
+              }
+              : envMetadata;
+            const m3AnalysisDurationMs = m3Result.runtimeMs ?? 0;
+            const auxiliaryDependency = !methodSet.has('M3');
             if (methodSet.has('M3') || repeatIndex === 1 || runsForSample > 1) {
               await writeRecordAndArtifact({
                 experimentId: options.experimentId,
@@ -1062,8 +1121,14 @@ export async function runExperimentBatch(options = {}) {
                 mvxVersion: VERSION,
                 mvxBaseCommit: envMetadata.mvxBaseCommit,
                 timestampUtc: new Date().toISOString(),
-                durationMs: m3Result.runtimeMs ?? 0,
-                environment: envMetadata,
+                durationMs: m3AnalysisDurationMs,
+                analysisDurationMs: m3AnalysisDurationMs,
+                scoringDurationMs: 0,
+                totalDurationMs: m3AnalysisDurationMs,
+                sharedAnalysisPass: false,
+                primaryWeightPass: null,
+                auxiliaryDependency,
+                environment: m3RecordEnv,
                 status: m3Result.status,
                 verdict: m3Result.verdict ?? null,
                 riskScore: m3Result.riskScore ?? null,
@@ -1169,6 +1234,12 @@ export async function runExperimentBatch(options = {}) {
             mvxBaseCommit: envMetadata.mvxBaseCommit,
             timestampUtc: new Date().toISOString(),
             durationMs: elapsed,
+            analysisDurationMs: 0,
+            scoringDurationMs: elapsed,
+            totalDurationMs: elapsed,
+            sharedAnalysisPass: false,
+            primaryWeightPass: weightProfile === uniqueWeights[0],
+            auxiliaryDependency: false,
             environment: envMetadata,
             status: m4Result.status,
             verdict: m4Result.m3Verdict ?? null,
@@ -1185,6 +1256,11 @@ export async function runExperimentBatch(options = {}) {
             status: m4Result.status,
             verdict: m4Result.m3Verdict ?? null,
             durationMs: elapsed,
+            analysisDurationMs: 0,
+            scoringDurationMs: elapsed,
+            totalDurationMs: elapsed,
+            sharedAnalysisPass: false,
+            primaryWeightPass: weightProfile === uniqueWeights[0],
             resumedFromCache: false
           });
         }
@@ -1284,7 +1360,9 @@ export async function runExperimentBatch(options = {}) {
   };
   manifestArtifact = await atomicWriteJson(runManifestPath, finalRunManifest);
 
-  if (lifecycleState === 'interrupted') {
+  const recordBreakdown = computeRecordBreakdown(allRecords, manifest.samples.length);
+
+  if (lifecycleState === 'interrupted' || haltedEarly) {
     await emitProgress('experiment.interrupted', {
       reason: haltReason,
       processedSamples,
@@ -1345,6 +1423,7 @@ export async function runExperimentBatch(options = {}) {
     totalRunRecords: allRecords.length,
     statusCounts,
     methodCounts,
+    recordBreakdown,
     provenanceCheck,
     stability: multiSampleStability,
     outputs: {

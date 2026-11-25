@@ -36,8 +36,11 @@ mvx research experiment \
 ```
 
 - Validates all inputs before creating output directories and delegates execution directly to `runExperimentBatch()`.
+- Streams structured real-time progress to `stdout` in `--format text` mode (while keeping `--format json` pure JSON) and appends all progress events to a separate `<experiment-dir>/progress.jsonl` without altering `runs.jsonl`.
+- Records explicit timing breakdown fields (`analysisDurationMs`, `scoringDurationMs`, `totalDurationMs`, `sharedAnalysisPass`) alongside `durationMs` so shared single-pass M1/M2 multi-weight evaluations are never confused with independent passes.
+- When `--methods M4` is run without `M3`, the primary `M3:r1` dynamic run is persisted with `auxiliaryDependency: true` so `mvx research resume` can reload cached M3 evidence without re-launching Docker.
 - Refuses to overwrite an existing experiment directory (`EXPERIMENT_EXISTS`) unless `--resume` is specified.
-- Halts immediately with `LAB_CONTAINMENT_VIOLATION` if dynamic execution detects uncontained external activity, while retaining persisted evidence.
+- Halts immediately with `LAB_CONTAINMENT_VIOLATION` and emits `experiment.interrupted` if dynamic execution detects uncontained external activity, while retaining persisted evidence.
 
 ### 3. Resume an Interrupted Experiment
 

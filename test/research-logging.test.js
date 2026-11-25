@@ -7,9 +7,11 @@ import { runCli } from '../src/cli.js';
 import { runExperimentBatch } from '../src/research/experiment-runner.js';
 import {
   collectExtendedEnvironmentMetadata,
+  computeRecordBreakdown,
   createProgressEvent,
   formatProgressEventText,
   normalizeStructuredFailure,
+  probeGitStatus,
   redactSensitiveObject,
   redactSensitiveText
 } from '../src/research/logging.js';
@@ -309,4 +311,127 @@ test('Experiment lifecycle handles interruption, preserves partial evidence, res
   assert.equal(failedBatch.records[0].failure.stage, 'intake');
   assert.equal(typeof failedBatch.records[0].failure.retryable, 'boolean');
   assert.match(failedBatch.records[0].failure.timestamp, /^\d{4}-\d{2}-\d{2}T/);
+});
+
+test('Audit P1-P5 fixes: repo-root git provenance, explicit timing breakdown, recordBreakdown, missing vs tampered artifacts, M3 runtime env, auxiliaryDependency, and 1-sample containment interrupt', async (t) => {
+  const temp = await mkdtemp(path.join(os.tmpdir(), 'mvx-audit-p1p5-'));
+  t.after(() => rm(temp, { recursive: true, force: true }));
+
+  // P1 (F4.2): probeGitStatus defaults to mvx-audit repo root regardless of caller cwd
+  const gitStatus = probeGitStatus();
+  assert.match(gitStatus.commit, /^[a-f0-9]{40}$/);
+  assert.ok(['clean', 'dirty'].includes(gitStatus.workingTreeStatus));
+
+  const cookieM1 = await runM1PermissionOnly(COOKIE_MV3, { sampleId: 'S1' });
+  const fusionConfig = {
+    schemaVersion: 1, configVersion: '2026.1-p1p5', formula: 'C-2', scoreCap: 100,
+    staticBlendAlpha: 0.5, confidenceMultipliers: { high: 1.0, medium: 0.7, low: 0.4 },
+    deduplicateMvx103Chain: true, tierABehavioralFloor: 85, tierBDynamicElevation: 35,
+    tierBEscalatesWithExternalNetwork: true, suspiciousDynamicElevation: 20,
+    requireExtensionInitiatorForSuspicious: true,
+    corroboration: { primaryCategoryBonus: 12, t04ConditionalBonus: 5, maxBonus: 20 },
+    allowStaticFallbackOnExecutionFailure: true,
+    riskTierThresholds: { critical: 80, high: 55, medium: 25 }
+  };
+  const makeLab = (contained) => async ({ scenario, output }) => ({
+    output, eventsPath: path.join(output, 'events.jsonl'), reportPath: path.join(output, 'report.json'),
+    scenarioPath: scenario, imageId: 'sha256:' + '8'.repeat(64),
+    report: {
+      schemaVersion: 1, verdict: contained ? 'no_trigger_observed' : 'confirmed_attack', contained,
+      summary: { uncontainedExternalRequests: contained ? 0 : 1, blockedExternalRequests: 0 },
+      objectives: {}, suspicious: [],
+      execution: {
+        extension: { packageSha256: cookieM1.provenance.packageSha256 },
+        browser: { name: 'chromium', version: '150.0.7871.181' },
+        durationMs: 900, isolation: { seccompSha256: 'c'.repeat(64) },
+        container: { imageId: 'sha256:' + '8'.repeat(64) }
+      },
+      evidenceProvenance: { scenario: { sha256: 'd'.repeat(64) }, events: { sha256: 'e'.repeat(64) }, evaluation: { sha256: 'a'.repeat(64) } },
+      caveats: []
+    }
+  });
+
+  // P2 (F1.2) + P3 (F3.2) + P5 (F4.4 & F2.2): multi-weight timing + recordBreakdown + M3 runtime env + auxiliaryDependency
+  const batch = await runExperimentBatch({
+    experimentId: 'exp-p1p5',
+    outputDir: temp,
+    manifest: {
+      schemaVersion: 1, datasetVersion: 'ds-p1p5',
+      samples: [
+        { sampleId: 'S1', extensionId: 'ext-1', artifactPath: COOKIE_MV3 },
+        { sampleId: 'S2', extensionId: 'ext-2', skip: true, skipReason: 'skip_test' }
+      ]
+    },
+    methods: ['M1', 'M2', 'M4'], // M3 omitted -> persisted with auxiliaryDependency: true
+    weightProfiles: ['W1', 'W2'],
+    scenarioPath: SCENARIO,
+    fusionConfig,
+    m3Options: { repeatCount: 1, labRunner: makeLab(true) },
+    acknowledgeRisk: true,
+    skipExternalProbes: true
+  });
+
+  const m1W1 = batch.records.find((r) => r.sampleId === 'S1' && r.method === 'M1' && r.weightProfile === 'W1');
+  const m1W2 = batch.records.find((r) => r.sampleId === 'S1' && r.method === 'M1' && r.weightProfile === 'W2');
+  assert.equal(m1W1.sharedAnalysisPass, true);
+  assert.equal(m1W1.primaryWeightPass, true);
+  assert.equal(m1W2.sharedAnalysisPass, true);
+  assert.equal(m1W2.primaryWeightPass, false);
+  assert.equal(typeof m1W1.analysisDurationMs, 'number');
+  assert.equal(typeof m1W1.scoringDurationMs, 'number');
+  assert.equal(m1W1.totalDurationMs, Number((m1W1.analysisDurationMs + m1W1.scoringDurationMs).toFixed(3)));
+  assert.notEqual(m1W1.riskScore, m1W2.riskScore);
+
+  const m3Rec = batch.records.find((r) => r.sampleId === 'S1' && r.method === 'M3');
+  assert.equal(m3Rec.auxiliaryDependency, true);
+  assert.equal(m3Rec.environment.docker.imageId, 'sha256:' + '8'.repeat(64));
+  assert.equal(m3Rec.environment.chromium.version, '150.0.7871.181');
+
+  const rb = batch.summary.recordBreakdown;
+  assert.deepEqual(rb, computeRecordBreakdown(batch.records, 2));
+  assert.equal(rb.independentSamplesInManifest, 2);
+  assert.equal(rb.uniqueStaticAnalysisPasses.M1, 1);
+  assert.equal(rb.weightProfileEvaluations.M1, 2);
+  assert.equal(rb.dynamicM3Executions.primary, 1);
+  assert.equal(rb.dynamicM3Executions.auxiliaryDependency, 1);
+  assert.equal(rb.nonExecutedPlaceholderRecords.skipped, 3);
+
+  // P4 (F4.3): inspect separates missingArtifacts from artifactHashMismatches
+  const artPath = path.join(batch.experimentRoot, m1W1.artifact.path);
+  await rm(artPath);
+  const missCap = captureStreams();
+  assert.equal(await runCli(['research', 'inspect', batch.experimentRoot, '--format', 'json'], missCap.streams), 0);
+  const missJson = JSON.parse(missCap.output().stdout);
+  assert.equal(missJson.provenanceValidation.valid, false);
+  assert.equal(missJson.provenanceValidation.missingArtifacts, 1);
+  assert.equal(missJson.provenanceValidation.artifactHashMismatches, 0);
+  assert.equal(missJson.runs.recordBreakdown.uniqueStaticAnalysisPasses.M1, 1);
+
+  await writeFile(artPath, '{"corrupted":true}\n', 'utf8');
+  const hashCap = captureStreams();
+  assert.equal(await runCli(['research', 'inspect', batch.experimentRoot, '--format', 'json'], hashCap.streams), 0);
+  const hashJson = JSON.parse(hashCap.output().stdout);
+  assert.equal(hashJson.provenanceValidation.missingArtifacts, 0);
+  assert.equal(hashJson.provenanceValidation.artifactHashMismatches, 1);
+
+  // P5 (F2.3): 1-sample containment violation emits experiment.interrupted consistently
+  const events = [];
+  const containBatch = await runExperimentBatch({
+    experimentId: 'exp-1sample-contain',
+    outputDir: temp,
+    manifest: {
+      schemaVersion: 1, datasetVersion: 'ds-c',
+      samples: [{ sampleId: 'S1', extensionId: 'ext-1', artifactPath: COOKIE_MV3 }]
+    },
+    methods: ['M3'],
+    weightProfiles: ['W1'],
+    scenarioPath: SCENARIO,
+    m3Options: { repeatCount: 1, labRunner: makeLab(false) },
+    acknowledgeRisk: true,
+    skipExternalProbes: true,
+    onProgress: (ev) => events.push(ev)
+  });
+  assert.equal(containBatch.summary.lifecycleState, 'failed');
+  assert.equal(events.at(-1).event, 'experiment.interrupted');
+  assert.equal(events.at(-1).reason, 'LAB_CONTAINMENT_VIOLATION');
 });

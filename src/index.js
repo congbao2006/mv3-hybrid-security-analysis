@@ -96,9 +96,9 @@ export {
 export {
   LIFECYCLE_STATES, LOGGING_PROFILE, LOGGING_SCHEMA_VERSION,
   PROGRESS_EVENT_TYPES, collectExtendedEnvironmentMetadata,
-  createProgressEvent, formatProgressEventText, isRetryableFailureCode,
-  normalizeStructuredFailure, probeDockerEnvironment, probeGitStatus,
-  probeNpmVersion, redactSensitiveObject, redactSensitiveText
+  computeRecordBreakdown, createProgressEvent, formatProgressEventText,
+  isRetryableFailureCode, normalizeStructuredFailure, probeDockerEnvironment,
+  probeGitStatus, probeNpmVersion, redactSensitiveObject, redactSensitiveText
 } from './research/logging.js';
 export {
   RESEARCH_CLI_SCHEMA_VERSION, RESEARCH_HELP, runResearchCli
