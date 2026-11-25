@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "CST-021 Base64 HTML",
+  "version": "1.0.0",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Base Number Converter",
+  "version": "1.0.0",
+  "description": "Converts decimal, binary, and hexadecimal numbers.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

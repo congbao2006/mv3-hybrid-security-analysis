@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "CST-031 Clipboard Chain",
+  "version": "1.0.0",
+  "permissions": [
+    "clipboardRead",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://accounts.example.test/*"
+  ],
+  "background": {
+    "service_worker": "worker.js"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Study Flashcard Viewer",
+  "version": "1.0.0",
+  "description": "Cycles through static vocabulary cards in popup.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

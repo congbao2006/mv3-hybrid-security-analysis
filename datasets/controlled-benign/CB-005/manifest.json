@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Pomodoro Study Timer",
+  "version": "1.0.0",
+  "description": "Runs a 25-minute timer using chrome.alarms.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "alarms",
+    "storage"
+  ]
+}

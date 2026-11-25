@@ -1,0 +1,24 @@
+# Real-World Malicious Artifacts Fetch List (20 verified IDs from mvx-audit/intel/catalog.jsonl)
+# WARNING: Live malware samples. Only fetch into git-ignored quarantine/ or datasets/real-world-malicious/ with --acknowledge-risk.
+# Never load into a host browser; execute M3 strictly inside Docker (--network none).
+
+mvx sample fetch pajkjnmeojmbapicmbpliphjmcekeaac --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-001: Cyberhaven security extension
+mvx sample fetch bgnpgpfjdpmgfdegmmjdbppccdhjhdpe --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-002: Screen Recorder
+mvx sample fetch iedbphhbpflhgpihkcceocomcdnemcbj --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-003: AI Webcam Effects + Recorder: Google Meet, Zoom, Discord & Other Meetings
+mvx sample fetch mleflnbfifngdmiknggikhfmjjmioofi --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-004: LookGood Live
+mvx sample fetch almalgbpmcfpdaopimbdchdliminoign --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-005: Urban Browser Guard
+mvx sample fetch nnnkddnnlpamobajfibfdgfnbcnkgngh --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-006: Infinity New Tab (Pro)
+mvx sample fetch mkhdiephfhifcgpmkaaboknnbdpjlneg --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-007: DeepSeek Assistant: AI Chat, Minibar, SidePanel & Search
+mvx sample fetch cdiohdbijdajffgccjmbblbikpnnnkeg --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-008: ZAP Wallet
+mvx sample fetch dgeiaiglmhdhajbpfbmajaajdlfdinpi --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-009: AI Agent Deep DeepSeek
+mvx sample fetch akdajpomgjgldidenledjjiemgkjcchc --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-010: Giant Coupons Official Extension
+mvx sample fetch mdcfennpfgkngnibjbpnpaafcjnhcjno --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-011: Web Client For Telegram T
+mvx sample fetch bpljfbcejldmgeoodnogeefaihjdgbam --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-012: Speed Test For Chrome Wif
+mvx sample fetch akkkopcadaalekbdgpdikhdablkgjagd --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-013: Slot Arabian
+mvx sample fetch alkfljfjkpiccfgbeocbbjjladigcleg --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-014: Frogtastic
+mvx sample fetch alllblhkgghelnejlggmmgjbkdabidie --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-015: Black Beard Slot Machine
+mvx sample fetch bbjdlbemjklojnbifkgameepcafflmem --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-016: Crazy Freekick
+mvx sample fetch cdpiopekjeonfjeocbfebemgocjciepp --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-017: Master Chess
+mvx sample fetch clpgopiimdjcilllcjncdkoeikkkcfbi --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-018: Billiards Pro
+mvx sample fetch dljlpildgknddpnahppkihgodokfjbnd --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-019: Slot Machine Zeus Treasures
+mvx sample fetch fibgndhgobbaaekmnneapojgkcehaeac --acknowledge-risk --quarantine ./datasets/real-world-malicious  # RWM-020: Tarot Side Panel

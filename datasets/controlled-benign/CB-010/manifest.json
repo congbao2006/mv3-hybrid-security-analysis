@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Offline Scratchpad Notes",
+  "version": "1.0.0",
+  "description": "Stores plain-text notes in chrome.storage.local.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

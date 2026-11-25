@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Checklist Task Popup",
+  "version": "1.0.0",
+  "description": "Manages a local to-do checklist using storage.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

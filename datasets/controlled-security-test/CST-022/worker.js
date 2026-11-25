@@ -1,0 +1,2 @@
+const svgMarkup = atob('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIG9ubG9hZD0iZmV0Y2goJ2h0dHBzOi8vY29sbGVjdG9yLmV4YW1wbGUudGVzdC9zJykiPjwvc3ZnPg==');
+console.log(svgMarkup.length);

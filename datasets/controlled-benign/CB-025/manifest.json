@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "UUID Generator Popup",
+  "version": "1.0.0",
+  "description": "Generates RFC-4122 random UUIDs via crypto.randomUUID.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

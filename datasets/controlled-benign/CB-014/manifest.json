@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Aspect Ratio Calculator",
+  "version": "1.0.0",
+  "description": "Computes display aspect ratios offline.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

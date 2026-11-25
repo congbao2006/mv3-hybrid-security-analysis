@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Minimal Status Dashboard",
+  "version": "1.0.0",
+  "description": "Shows extension manifest version and uptime locally.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

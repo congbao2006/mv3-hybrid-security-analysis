@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Markdown Checklist Preview",
+  "version": "1.0.0",
+  "description": "Renders plain-text task counts using textContent.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

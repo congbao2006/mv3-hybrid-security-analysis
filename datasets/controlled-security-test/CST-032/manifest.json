@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "CST-032 History Chain",
+  "version": "1.0.0",
+  "permissions": [
+    "history",
+    "webNavigation"
+  ],
+  "background": {
+    "service_worker": "worker.js"
+  }
+}

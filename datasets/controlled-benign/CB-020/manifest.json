@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Typography Scale Calculator",
+  "version": "1.0.0",
+  "description": "Calculates modular heading font sizes offline.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

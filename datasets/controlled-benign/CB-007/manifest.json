@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Word Count Utility",
+  "version": "1.0.0",
+  "description": "Counts words pasted into the popup textarea.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

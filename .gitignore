@@ -9,3 +9,9 @@ chrome-mac.zip
 results/local/
 results/raw/
 quarantine/
+datasets/real-world-malicious/*.crx
+datasets/real-world-malicious/*.zip
+datasets/real-world-malicious/unpacked/
+datasets/real-world-benign/*.crx
+datasets/real-world-benign/*.zip
+datasets/real-world-benign/unpacked/

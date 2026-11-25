@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "URL Query Inspector Popup",
+  "version": "1.0.0",
+  "description": "Parses pasted URL query parameters locally.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

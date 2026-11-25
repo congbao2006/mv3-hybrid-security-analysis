@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "CST-040 T08 Supply Chain Vendor",
+  "version": "1.0.0",
+  "permissions": [
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendor/legacy-lib-1.12.4.min.js",
+        "content.js"
+      ]
+    }
+  ]
+}

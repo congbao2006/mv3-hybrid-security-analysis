@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Stopwatch Utility",
+  "version": "1.0.0",
+  "description": "Measures elapsed intervals locally in popup.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

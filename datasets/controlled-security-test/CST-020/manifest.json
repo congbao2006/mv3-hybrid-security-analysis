@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "CST-020 Base64 JS",
+  "version": "1.0.0",
+  "background": {
+    "service_worker": "worker.js"
+  }
+}

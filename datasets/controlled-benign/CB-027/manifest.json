@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Timer Reminder Alarm",
+  "version": "1.0.0",
+  "description": "Schedules a single local alarm notification count.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "alarms"
+  ]
+}

@@ -1,0 +1,706 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "mv3-controlled-suite-v1-70",
+  "samples": [
+    {
+      "sampleId": "CB-001",
+      "extensionId": "local:controlled-benign/CB-001",
+      "extensionName": "MVX benign dynamic fixture",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-001",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "9641c1ce079fd78cd1dcfca08da665f993d00191772845080ad0f8c264b677d2",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-002",
+      "extensionId": "local:controlled-benign/CB-002",
+      "extensionName": "Reading Time Indicator",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-002",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "a5fa1914831a97326ccba5174f33626972328e09457b9a09709a5919c00e6005",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-003",
+      "extensionId": "local:controlled-benign/CB-003",
+      "extensionName": "Focus Mode Style Toggle",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-003",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "9221f4e948c103466b248bcf8d16ba0d76cdc1756c86add4926192fc3753c050",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-004",
+      "extensionId": "local:controlled-benign/CB-004",
+      "extensionName": "Popup Clock Widget",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-004",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "17bc03c73bcb577051a57752ed1007dca6eff662f5a7f834b178ac776c8e99f0",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-005",
+      "extensionId": "local:controlled-benign/CB-005",
+      "extensionName": "Pomodoro Study Timer",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-005",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "33863b7c3b6fc1394bffa6c46ed6a8579faac5ffdbf443aa5cd539db9876aa83",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-006",
+      "extensionId": "local:controlled-benign/CB-006",
+      "extensionName": "Action Badge Counter",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-006",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "8588278abaa5377e2e988426c8071afc01f0730f29e527f138189f29c6c8757d",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-007",
+      "extensionId": "local:controlled-benign/CB-007",
+      "extensionName": "Word Count Utility",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-007",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "a465ea3197ced1ddcef1f93220420740119e7b7dd24a0f11a0cf6682019b58e4",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-008",
+      "extensionId": "local:controlled-benign/CB-008",
+      "extensionName": "Unit Converter Popup",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-008",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "f4a9fb9231237260c1ac6782ebc2cbcb144badf723fae20ade04301e0e163fbf",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-009",
+      "extensionId": "local:controlled-benign/CB-009",
+      "extensionName": "Color Hex Swatch Picker",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-009",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "4846f529c8005a57c14b97b1451f05c7389fef4b244ee94b2e138bcd26e7933b",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-010",
+      "extensionId": "local:controlled-benign/CB-010",
+      "extensionName": "Offline Scratchpad Notes",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-010",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "23351331e36e5171909f92a0977b08969fcbb6e143cbc0a7d2c0c1ac0d06f209",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-011",
+      "extensionId": "local:controlled-benign/CB-011",
+      "extensionName": "JSON Pretty Printer Popup",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-011",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "f25f599c4e46fd252fded8b3f5b1288579d29cd204a4f32d05f38517a18948f1",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-012",
+      "extensionId": "local:controlled-benign/CB-012",
+      "extensionName": "Stopwatch Utility",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-012",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "85758ee8c9b46198404a4848ff55f16eb734a5797f73f01328886120f7450ad5",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-013",
+      "extensionId": "local:controlled-benign/CB-013",
+      "extensionName": "Timestamp Converter",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-013",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "3d2c7f540429306c62aa19d3a36673e78988baa64980eb7a1c2341e1d82642d1",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-014",
+      "extensionId": "local:controlled-benign/CB-014",
+      "extensionName": "Aspect Ratio Calculator",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-014",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "38e7c217dc4c1838f0860155ecd48847ab6de71bceb433ff7748bb77cda41117",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-015",
+      "extensionId": "local:controlled-benign/CB-015",
+      "extensionName": "Checklist Task Popup",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-015",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "f4e523dbd8b07f154c08b0b1fb263fc13119847e07a34e7a81bac0769bc6fb79",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-016",
+      "extensionId": "local:controlled-benign/CB-016",
+      "extensionName": "Character Counter Utility",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-016",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "7de9a3db426cce8f535dc7b7226b837b82e75565453c2d6c19e39cfaab59d130",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-017",
+      "extensionId": "local:controlled-benign/CB-017",
+      "extensionName": "Base Number Converter",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-017",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "79c8e3a353ab7f61a8b6f09e1767d849f45d3714e2b5af8ff0129c2ab05cb5e3",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-018",
+      "extensionId": "local:controlled-benign/CB-018",
+      "extensionName": "Study Flashcard Viewer",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-018",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "70ccf863184766cb5d6d247459bd0a925db0335e893c0a071ef49d8eff1be08e",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-019",
+      "extensionId": "local:controlled-benign/CB-019",
+      "extensionName": "Keyboard Shortcut Cheat Sheet",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-019",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "99f8cca67d281a535f80898ed43ef7f9bac1e7c43b20e7d2e5eee124a119b8f6",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-020",
+      "extensionId": "local:controlled-benign/CB-020",
+      "extensionName": "Typography Scale Calculator",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-020",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "433fda057747f93fc950c39e7b349294edb548a3f690800eab271aa7d95cbea4",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-021",
+      "extensionId": "local:controlled-benign/CB-021",
+      "extensionName": "Contrast Ratio Checker",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-021",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "25ccf1ed0c1340a7c1bb872dc2b908b1cb8dace7923dadb33400d3a2d6a593f6",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-022",
+      "extensionId": "local:controlled-benign/CB-022",
+      "extensionName": "Reading Pace Calculator",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-022",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "9c3159041a785bcbf817bff60ad545743be44e9f3d2cbf0eec74294a5d95ad94",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-023",
+      "extensionId": "local:controlled-benign/CB-023",
+      "extensionName": "Markdown Checklist Preview",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-023",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "56045da28906e05e4c4cca929dcc41e22e7a081effa6b7aca6c165ca6d7fa407",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-024",
+      "extensionId": "local:controlled-benign/CB-024",
+      "extensionName": "ASCII Table Reference",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-024",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "8bf0a9cf8aa78bfb646290772c2fc2cc4b6564675afae885db806d9c2abaf7ec",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-025",
+      "extensionId": "local:controlled-benign/CB-025",
+      "extensionName": "UUID Generator Popup",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-025",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "65ee3ade7cbff118781ca6f4add6934b493166029d338c43a72144e68e39e52c",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-026",
+      "extensionId": "local:controlled-benign/CB-026",
+      "extensionName": "Password Strength Meter Offline",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-026",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "90fd669ca99f46f2403131c740cf0f7a126ef72c76a67ec3ca03d7b60b8d8e6d",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-027",
+      "extensionId": "local:controlled-benign/CB-027",
+      "extensionName": "Timer Reminder Alarm",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-027",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "798a94984d8817930ad909e10a392d501b2706e6a6d99f93b66e4c26cd3714b8",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-028",
+      "extensionId": "local:controlled-benign/CB-028",
+      "extensionName": "URL Query Inspector Popup",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-028",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "4a84e044a58e0b2969bb55ca8abfbce251c7ded61891aea13cb9357b7929ad51",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-029",
+      "extensionId": "local:controlled-benign/CB-029",
+      "extensionName": "CSV Column Counter Popup",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-029",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "bf607b92c13744c0721b89c6322f38406033dc22d3da6a6f70b91b0b348c8834",
+      "skip": false
+    },
+    {
+      "sampleId": "CB-030",
+      "extensionId": "local:controlled-benign/CB-030",
+      "extensionName": "Minimal Status Dashboard",
+      "cohort": "controlled_benign",
+      "artifactPath": "./controlled-benign/CB-030",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "7382b7edbbe702e342cdf7e1c65018e6922d54017cc1e8be6a51e4ef4378b106",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-001",
+      "extensionId": "local:controlled-security-test/CST-001",
+      "extensionName": "MVX broad host fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-001",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "7d6520596ef91e42d18360ff0884ce0c96102dde6d947820e72bdcf5bc6e8ea7",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-002",
+      "extensionId": "local:controlled-security-test/CST-002",
+      "extensionName": "MVX cookie fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-002",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "3ae58ac8094505ab3e469e78205b2deb93112e9c3ed3bc58ecdd0191323905c0",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-003",
+      "extensionId": "local:controlled-security-test/CST-003",
+      "extensionName": "MVX remote code fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-003",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "7541be38db03d3b627f19a7a6f4da6401d9eba590f98ea6f7a8d69b7cde5eb19",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-004",
+      "extensionId": "local:controlled-security-test/CST-004",
+      "extensionName": "MVX request mutation fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-004",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "0fae0d33e17187019620d8b8feecd3b3916a8e73ed7f85a7a6197e56376d50e6",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-005",
+      "extensionId": "local:controlled-security-test/CST-005",
+      "extensionName": "MVX request redirect fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-005",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "d4d82bb01ad5992f26aa00dc9c20f18e1f66afd5d52ffac3468d39f442e6ed17",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-006",
+      "extensionId": "local:controlled-security-test/CST-006",
+      "extensionName": "MVX CSP header fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-006",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "17f94a6a92d64b652e6da1616447e0a01e61f3066b2a84e2a9226500d6940472",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-007",
+      "extensionId": "local:controlled-security-test/CST-007",
+      "extensionName": "MVX keystroke fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-007",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "9dfb01cd50a17bc013015bd67eb34348803137333245cb0b714d8050109fe310",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-008",
+      "extensionId": "local:controlled-security-test/CST-008",
+      "extensionName": "MVX message bridge fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-008",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "d06966dde3867c969243cae28eed97cb063824262e8531ef31ec5c6982726502",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-009",
+      "extensionId": "local:controlled-security-test/CST-009",
+      "extensionName": "MVX external message fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-009",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "9fa98b01e45737e97b0c5b5fabc980e236ee39d712b184645647b6c2686204c0",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-010",
+      "extensionId": "local:controlled-security-test/CST-010",
+      "extensionName": "MVX resource exposure fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-010",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "a1fcd9db6336dd210931091fb9ea5502cdefd3be5c0497a5366c7b934c129292",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-011",
+      "extensionId": "local:controlled-security-test/CST-011",
+      "extensionName": "MVX debugger fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-011",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "87087957df32a6c4724b10ee06127adbc2ed20613a3ec398df526b18fa1a8c6f",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-012",
+      "extensionId": "local:controlled-security-test/CST-012",
+      "extensionName": "MVX native messaging fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-012",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "245d574f4e15e5de60019ecc45f07de07acd5fd3bb032246d05a9610957dc7eb",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-013",
+      "extensionId": "local:controlled-security-test/CST-013",
+      "extensionName": "MVX proxy fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-013",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "ef20e1fb81d67dd1c68ca62342f79baf55487f81ffd40d039567cc631e105394",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-014",
+      "extensionId": "local:controlled-security-test/CST-014",
+      "extensionName": "MVX download fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-014",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "0edf2e13ac7ea1edaf21ddc0d5f14c9ad574ec129a81c8594db661de9d08d0a2",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-015",
+      "extensionId": "local:controlled-security-test/CST-015",
+      "extensionName": "MVX history fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-015",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "777ffd0492e15835dcdfe7ff2c53b2242fd5c4f4899aec597092ba7de302bf64",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-016",
+      "extensionId": "local:controlled-security-test/CST-016",
+      "extensionName": "MVX clipboard fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-016",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "2745d3130fb68fb4a6aa8553fee05e68ac95fddb2ce2402095b591d9637298d1",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-017",
+      "extensionId": "local:controlled-security-test/CST-017",
+      "extensionName": "MVX management fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-017",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "7eef701277c601c1374136d35c6ac0c404fe90b9bb8484525d1b9c534dd65e2f",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-018",
+      "extensionId": "local:controlled-security-test/CST-018",
+      "extensionName": "MVX insecure transport fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-018",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "cde68c1309306915ccdde193140011b0bddd7b49c233defec64eff8b2ce8f0fe",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-019",
+      "extensionId": "local:controlled-security-test/CST-019",
+      "extensionName": "MVX synthetic exfiltration fixture",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-019",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "24b1e65ef8e63fa9e4b0b51033fe915e79fb2aa4e1c1e497f74589f1b627de86",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-020",
+      "extensionId": "local:controlled-security-test/CST-020",
+      "extensionName": "Encoded Base64 JS payload fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-020",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "2c86d91399965fd48c7f9febb9b30d1a1c83dd70aec0eadf8204982c538f47a4",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-021",
+      "extensionId": "local:controlled-security-test/CST-021",
+      "extensionName": "Encoded Base64 HTML payload fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-021",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "dac7a91c0fb1139360effff484ea3103b137bce6e0bf25777279eb9e029ba48f",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-022",
+      "extensionId": "local:controlled-security-test/CST-022",
+      "extensionName": "Encoded Base64 SVG handler fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-022",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "75419f4fa9e4770b220fd822f8e88de55ad67989af5968717cdcbf48eb8b7dc2",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-023",
+      "extensionId": "local:controlled-security-test/CST-023",
+      "extensionName": "MAIN-world all_frames content script fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-023",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "ca12e428393fc5ef45e52ff751d1dd8effab26d1ed374fe73a918cadea364efa",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-024",
+      "extensionId": "local:controlled-security-test/CST-024",
+      "extensionName": "Permissive extension CSP fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-024",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "46cb810630e3eb4673e64f40ce9bc0a7d3677d195701dc50bef8b3d07f3f8f5c",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-025",
+      "extensionId": "local:controlled-security-test/CST-025",
+      "extensionName": "Wildcard postMessage broadcast fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-025",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "e5d37c993743a2ff751395759290866d320d5c51e9d103e0877c8f812cc298e3",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-026",
+      "extensionId": "local:controlled-security-test/CST-026",
+      "extensionName": "DOM innerHTML injection fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-026",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "c949c0d60dbb4506d56ec487bfd286b8c558e2b1457f09e4c6dae7972e171e3e",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-027",
+      "extensionId": "local:controlled-security-test/CST-027",
+      "extensionName": "DOM document.write manipulation fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-027",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "689b184586ffd3bc47d7d5016bf4a69916e0ef95774117b1ca792a92639df237",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-028",
+      "extensionId": "local:controlled-security-test/CST-028",
+      "extensionName": "Remote iframe UI delegation fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-028",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "4dc5487d99e930fa2c3cb970bbd0d0621c76e83ee0a65f45947f86abb8dcf2b3",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-029",
+      "extensionId": "local:controlled-security-test/CST-029",
+      "extensionName": "Dynamic Function constructor fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-029",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "94d3fa6b64a0a55f54bb6342d083e770c4599cce506f98d3c48193a48c748e7f",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-030",
+      "extensionId": "local:controlled-security-test/CST-030",
+      "extensionName": "Cookie and fetch exfiltration chain fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-030",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "18ba936d25208b507a94bfa425ff80ced41c8e769d63519c4c3ec033b0cf2aa5",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-031",
+      "extensionId": "local:controlled-security-test/CST-031",
+      "extensionName": "Clipboard read and transport chain fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-031",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "e8f525a92b2a49b3519f671a4c60737d459909bac9d3fdade5bd0f491861f9a9",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-032",
+      "extensionId": "local:controlled-security-test/CST-032",
+      "extensionName": "History and webNavigation telemetry chain fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-032",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "dbb258d49a47fadf2f383058407f1f8a93bc5a9b414a5ef1d9df759edaafc93f",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-033",
+      "extensionId": "local:controlled-security-test/CST-033",
+      "extensionName": "Disabled static DNR header-stripping ruleset fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-033",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "9132f18859e862c747a3c614572b462fbe8df03349ee83c42316b6bbe92eb9c1",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-034",
+      "extensionId": "local:controlled-security-test/CST-034",
+      "extensionName": "Static DNR redirect hijack fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-034",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "a9a19307edbd7303b0d02095881f20dcf44b8cb6751c634cdaa6aae1a6587624",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-035",
+      "extensionId": "local:controlled-security-test/CST-035",
+      "extensionName": "Malformed static DNR ruleset fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-035",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "32a5ef630bae2fdb51dc8afc14baf85da4767f01f73b0dfc9a27756c02e233b7",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-036",
+      "extensionId": "local:controlled-security-test/CST-036",
+      "extensionName": "Unauthorized tab navigation redirect fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-036",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "9f1652f1e8c4e92631048a7dbbf71644d101997dbe3abc45ff4fe854e50656f5",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-037",
+      "extensionId": "local:controlled-security-test/CST-037",
+      "extensionName": "Unprompted download trigger fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-037",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "a04e23d91d5a78d709d2158727c3fb82a34ccb8be46f174cd217b54372b0f597",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-038",
+      "extensionId": "local:controlled-security-test/CST-038",
+      "extensionName": "Opaque WebAssembly binary payload fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-038",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "631380f729890e6b7ccdee5f1f499e1e2485bee2e2ee50ee069989dcd2c6f940",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-039",
+      "extensionId": "local:controlled-security-test/CST-039",
+      "extensionName": "T07 Resource Abuse compute worker specification (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-039",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "90c5cbc35a0c411663d27a349b744496e0c7d86f51933f984b9cb1f8912faa87",
+      "skip": false
+    },
+    {
+      "sampleId": "CST-040",
+      "extensionId": "local:controlled-security-test/CST-040",
+      "extensionName": "T08 Software Supply Chain vendored legacy library fixture (MV3)",
+      "cohort": "controlled_security_test",
+      "artifactPath": "./controlled-security-test/CST-040",
+      "expectedArchiveSha256": null,
+      "expectedPackageSha256": "4069029e9bc535fee3504051848017489d218f37134accd8ecdfb71fe7bb58bd",
+      "skip": false
+    }
+  ]
+}

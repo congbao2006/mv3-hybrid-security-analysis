@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "CST-039 T07 Compute Worker Spec",
+  "version": "1.0.0",
+  "permissions": [
+    "alarms",
+    "offscreen"
+  ],
+  "background": {
+    "service_worker": "worker.js"
+  }
+}

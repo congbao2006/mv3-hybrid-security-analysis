@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Timestamp Converter",
+  "version": "1.0.0",
+  "description": "Converts Unix timestamps to ISO-8601 strings.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

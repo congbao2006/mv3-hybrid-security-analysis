@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "CST-033 Disabled DNR Ruleset",
+  "version": "1.0.0",
+  "permissions": [
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_hidden",
+        "enabled": false,
+        "path": "rules.json"
+      }
+    ]
+  }
+}

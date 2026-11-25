@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "url": "https://redirect.example.test/landing"
+      }
+    },
+    "condition": {
+      "urlFilter": "accounts.example.test",
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
+  }
+]
