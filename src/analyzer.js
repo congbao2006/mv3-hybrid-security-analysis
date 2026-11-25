@@ -37,7 +37,7 @@ function manifestReferences(manifest) {
   return references;
 }
 
-function analyzeIntegrity(manifest, files) {
+export function analyzeIntegrity(manifest, files) {
   const available = new Set(files);
   const missing = manifestReferences(manifest).filter(({ value }) => {
     const segments = value.split('/');

@@ -176,113 +176,149 @@ async function forceRemoveContainer(cidFile) {
   throw error;
 }
 
-const options = parse(process.argv.slice(2));
-const extension = path.resolve(options.extension);
-const scenario = path.resolve(options.scenario);
-const extensionStat = await lstat(extension);
-const scenarioStat = await lstat(scenario);
-if (extensionStat.isSymbolicLink() || !extensionStat.isDirectory()) throw new Error('Extension must be a real directory');
-if (scenarioStat.isSymbolicLink() || !scenarioStat.isFile()) throw new Error('Scenario must be a real regular file');
-const canonicalExtension = await realpath(extension);
-const requestedOutput = path.resolve(options.output);
-if (overlaps(canonicalExtension, requestedOutput) || overlaps(requestedOutput, canonicalExtension)) {
-  throw new Error('Output directory must not overlap the extension tree');
-}
-await mkdir(requestedOutput, { recursive: true, mode: 0o700 });
-const requestedOutputStat = await lstat(requestedOutput);
-if (requestedOutputStat.isSymbolicLink() || !requestedOutputStat.isDirectory()) throw new Error('Output must be a real directory');
-const output = await realpath(requestedOutput);
-if (overlaps(canonicalExtension, output) || overlaps(output, canonicalExtension)) {
-  throw new Error('Output directory must not overlap the extension tree');
-}
-await chmod(output, 0o700);
-if ((await readdir(output)).length > 0) throw new Error('Output directory must be empty');
-if ([extension, scenario, output, SECCOMP_PROFILE].some((value) => value.includes(','))) {
-  throw new Error('Docker bind-mount paths cannot contain commas');
-}
-const image = options.image ?? 'mvx-lab:local';
-if (!IMAGE_REFERENCE.test(image)) throw new Error('Container image reference is invalid');
-const snapshot = await prepareLabInputSnapshot(extension, scenario);
-let labError;
-let containerIdFile;
-let retainSnapshot = false;
-try {
-  const seccompBytes = await readBoundedRegularFile(SECCOMP_PROFILE, {
+export async function runLabContainer(options = {}) {
+  if (!options || typeof options !== 'object' || Array.isArray(options)) {
+    throw new Error('Lab run options must be an object');
+  }
+  if (!options.acknowledgeRisk) throw new Error('Refusing live extension execution without --acknowledge-risk');
+  for (const key of ['extension', 'scenario', 'output']) {
+    if (typeof options[key] !== 'string' || options[key].length === 0) {
+      throw new Error(`--${key} is required`);
+    }
+  }
+  const extension = path.resolve(options.extension);
+  const scenario = path.resolve(options.scenario);
+  const extensionStat = await lstat(extension);
+  const scenarioStat = await lstat(scenario);
+  if (extensionStat.isSymbolicLink() || !extensionStat.isDirectory()) throw new Error('Extension must be a real directory');
+  if (scenarioStat.isSymbolicLink() || !scenarioStat.isFile()) throw new Error('Scenario must be a real regular file');
+  const canonicalExtension = await realpath(extension);
+  const requestedOutput = path.resolve(options.output);
+  if (overlaps(canonicalExtension, requestedOutput) || overlaps(requestedOutput, canonicalExtension)) {
+    throw new Error('Output directory must not overlap the extension tree');
+  }
+  await mkdir(requestedOutput, { recursive: true, mode: 0o700 });
+  const requestedOutputStat = await lstat(requestedOutput);
+  if (requestedOutputStat.isSymbolicLink() || !requestedOutputStat.isDirectory()) throw new Error('Output must be a real directory');
+  const output = await realpath(requestedOutput);
+  if (overlaps(canonicalExtension, output) || overlaps(output, canonicalExtension)) {
+    throw new Error('Output directory must not overlap the extension tree');
+  }
+  await chmod(output, 0o700);
+  if ((await readdir(output)).length > 0) throw new Error('Output directory must be empty');
+  if ([extension, scenario, output, SECCOMP_PROFILE].some((value) => value.includes(','))) {
+    throw new Error('Docker bind-mount paths cannot contain commas');
+  }
+  const image = options.image ?? 'mvx-lab:local';
+  if (!IMAGE_REFERENCE.test(image)) throw new Error('Container image reference is invalid');
+  const snapshot = await prepareLabInputSnapshot(extension, scenario);
+  let labError;
+  let containerIdFile;
+  let retainSnapshot = false;
+  let runResult;
+  try {
+    const seccompBytes = await readBoundedRegularFile(SECCOMP_PROFILE, {
       maxBytes: 1_000_000, label: 'Lab seccomp profile', limitCode: 'LAB_LIMIT',
       missingCode: 'LAB_INPUT_NOT_FOUND', unsafeCode: 'UNSAFE_LAB_INPUT'
     });
-  const scenarioSha256 = sha256(snapshot.scenarioBytes);
-  const seccompSha256 = sha256(seccompBytes);
-  const seccompSnapshot = path.join(snapshot.workspace, 'seccomp.json');
-  const retainedScenario = path.join(output, 'scenario.json');
-  await writeFile(seccompSnapshot, seccompBytes, { flag: 'wx', mode: 0o400 });
-  await writeFile(retainedScenario, snapshot.scenarioBytes, { flag: 'wx', mode: 0o600 });
-  const imageId = await capture('docker', ['image', 'inspect', '--format', '{{.Id}}', image]);
-  if (!/^sha256:[a-f0-9]{64}$/.test(imageId)) throw new Error('Docker returned a non-canonical image ID');
+    const scenarioSha256 = sha256(snapshot.scenarioBytes);
+    const seccompSha256 = sha256(seccompBytes);
+    const seccompSnapshot = path.join(snapshot.workspace, 'seccomp.json');
+    const retainedScenario = path.join(output, 'scenario.json');
+    await writeFile(seccompSnapshot, seccompBytes, { flag: 'wx', mode: 0o400 });
+    await writeFile(retainedScenario, snapshot.scenarioBytes, { flag: 'wx', mode: 0o600 });
+    const imageId = await capture('docker', ['image', 'inspect', '--format', '{{.Id}}', image]);
+    if (!/^sha256:[a-f0-9]{64}$/.test(imageId)) throw new Error('Docker returned a non-canonical image ID');
 
-  const eventsPath = path.join(output, 'events.jsonl');
-  containerIdFile = path.join(snapshot.workspace, 'container.cid');
-  await captureToFile('docker', [
-    'run', '--rm', '--cidfile', containerIdFile, '--pull', 'never', '--stop-timeout', '2', '--network', 'none', '--read-only', '--cap-drop', 'ALL',
-    '--security-opt', 'no-new-privileges', '--security-opt', `seccomp=${seccompSnapshot}`,
-    '--pids-limit', '256', '--memory', '1g', '--cpus', '2', '--tmpfs', '/tmp:rw,noexec,nosuid,size=512m',
-    '--env', `MVX_LAB_PROFILE=${LAB_EXECUTION_PROFILE}`,
-    '--env', `MVX_LAB_TOOL_VERSION=${VERSION}`,
-    '--env', `MVX_LAB_IMAGE_ID=${imageId}`,
-    '--env', `MVX_LAB_IMAGE_REFERENCE=${image}`,
-    '--env', `MVX_LAB_PACKAGE_SHA256=${snapshot.package.sha256}`,
-    '--env', `MVX_LAB_ANALYSIS_SHA256=${snapshot.analysis.sha256}`,
-    '--env', `MVX_LAB_SCENARIO_SHA256=${scenarioSha256}`,
-    '--env', `MVX_LAB_SECCOMP_SHA256=${seccompSha256}`,
-    '--mount', `type=bind,src=${snapshot.extension},dst=/sample,readonly`,
-    '--mount', `type=bind,src=${snapshot.scenario},dst=/scenario.json,readonly`,
-    imageId, '--acknowledge-risk'
-  ], eventsPath);
+    const eventsPath = path.join(output, 'events.jsonl');
+    containerIdFile = path.join(snapshot.workspace, 'container.cid');
+    await captureToFile('docker', [
+      'run', '--rm', '--cidfile', containerIdFile, '--pull', 'never', '--stop-timeout', '2', '--network', 'none', '--read-only', '--cap-drop', 'ALL',
+      '--security-opt', 'no-new-privileges', '--security-opt', `seccomp=${seccompSnapshot}`,
+      '--pids-limit', '256', '--memory', '1g', '--cpus', '2', '--tmpfs', '/tmp:rw,noexec,nosuid,size=512m',
+      '--env', `MVX_LAB_PROFILE=${LAB_EXECUTION_PROFILE}`,
+      '--env', `MVX_LAB_TOOL_VERSION=${VERSION}`,
+      '--env', `MVX_LAB_IMAGE_ID=${imageId}`,
+      '--env', `MVX_LAB_IMAGE_REFERENCE=${image}`,
+      '--env', `MVX_LAB_PACKAGE_SHA256=${snapshot.package.sha256}`,
+      '--env', `MVX_LAB_ANALYSIS_SHA256=${snapshot.analysis.sha256}`,
+      '--env', `MVX_LAB_SCENARIO_SHA256=${scenarioSha256}`,
+      '--env', `MVX_LAB_SECCOMP_SHA256=${seccompSha256}`,
+      '--mount', `type=bind,src=${snapshot.extension},dst=/sample,readonly`,
+      '--mount', `type=bind,src=${snapshot.scenario},dst=/scenario.json,readonly`,
+      imageId, '--acknowledge-risk'
+    ], eventsPath);
 
-  const report = await evaluateLabFiles(retainedScenario, eventsPath);
-  if (!report.execution
-    || report.execution.extension.packageSha256 !== snapshot.package.sha256
-    || report.execution.extension.analysisSha256 !== snapshot.analysis.sha256
-    || report.execution.scenarioSha256 !== scenarioSha256
-    || report.execution.isolation.seccompSha256 !== seccompSha256
-    || report.execution.container.imageId !== imageId) {
-    throw new Error('Container evidence did not preserve the host-bound execution identity');
+    const report = await evaluateLabFiles(retainedScenario, eventsPath);
+    if (!report.execution
+      || report.execution.extension.packageSha256 !== snapshot.package.sha256
+      || report.execution.extension.analysisSha256 !== snapshot.analysis.sha256
+      || report.execution.scenarioSha256 !== scenarioSha256
+      || report.execution.isolation.seccompSha256 !== seccompSha256
+      || report.execution.container.imageId !== imageId) {
+      throw new Error('Container evidence did not preserve the host-bound execution identity');
+    }
+    const reportPath = path.join(output, 'report.json');
+    await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`, {
+      encoding: 'utf8', flag: 'wx', mode: 0o600
+    });
+    runResult = {
+      report,
+      output,
+      eventsPath,
+      reportPath,
+      scenarioPath: retainedScenario,
+      imageId
+    };
+  } catch (error) {
+    labError = error;
+    if (containerIdFile) {
+      try {
+        await forceRemoveContainer(containerIdFile);
+      } catch (cleanupError) {
+        retainSnapshot = true;
+        const combined = new Error(`Lab container cleanup failed after ${labError.code ?? labError.name ?? 'run failure'}; recorded snapshot path may be stale: ${snapshot.workspace}`);
+        combined.code = 'LAB_CONTAINER_CLEANUP_FAILED';
+        combined.originalCode = labError.code ?? labError.name ?? 'ERROR';
+        combined.recordedSnapshotPath = snapshot.workspace;
+        combined.snapshotPathConfirmed = false;
+        combined.cause = cleanupError;
+        labError = combined;
+      }
+    }
   }
-  await writeFile(path.join(output, 'report.json'), `${JSON.stringify(report, null, 2)}\n`, {
-    encoding: 'utf8', flag: 'wx', mode: 0o600
-  });
-  process.stdout.write(`Lab verdict: ${report.verdict}; contained: ${report.contained ? 'yes' : 'NO'}\n`);
-  if (!report.contained) process.exitCode = 1;
-} catch (error) {
-  labError = error;
-  if (containerIdFile) {
+  if (!retainSnapshot) {
     try {
-      await forceRemoveContainer(containerIdFile);
+      await removeLabInputSnapshot(snapshot);
     } catch (cleanupError) {
-      retainSnapshot = true;
-      const combined = new Error(`Lab container cleanup failed after ${labError.code ?? labError.name ?? 'run failure'}; recorded snapshot path may be stale: ${snapshot.workspace}`);
-      combined.code = 'LAB_CONTAINER_CLEANUP_FAILED';
-      combined.originalCode = labError.code ?? labError.name ?? 'ERROR';
+      const combined = new Error(`Private lab snapshot cleanup failed${labError ? ` after ${labError.code ?? labError.name ?? 'run failure'}` : ''}; recorded snapshot path may be stale: ${snapshot.workspace}`);
+      combined.code = 'LAB_TEMP_CLEANUP_FAILED';
+      if (labError) combined.originalCode = labError.code ?? labError.name ?? 'ERROR';
       combined.recordedSnapshotPath = snapshot.workspace;
       combined.snapshotPathConfirmed = false;
       combined.cause = cleanupError;
-      labError = combined;
+      throw combined;
     }
   }
+  if (labError) throw labError;
+  return runResult;
 }
-if (!retainSnapshot) {
+
+async function isMainModule() {
+  if (!process.argv[1]) return false;
+  const selfPath = fileURLToPath(import.meta.url);
   try {
-    await removeLabInputSnapshot(snapshot);
-  } catch (cleanupError) {
-    const combined = new Error(`Private lab snapshot cleanup failed${labError ? ` after ${labError.code ?? labError.name ?? 'run failure'}` : ''}; recorded snapshot path may be stale: ${snapshot.workspace}`);
-    combined.code = 'LAB_TEMP_CLEANUP_FAILED';
-    if (labError) combined.originalCode = labError.code ?? labError.name ?? 'ERROR';
-    combined.recordedSnapshotPath = snapshot.workspace;
-    combined.snapshotPathConfirmed = false;
-    combined.cause = cleanupError;
-    throw combined;
+    return await realpath(path.resolve(process.argv[1])) === await realpath(selfPath);
+  } catch {
+    return path.resolve(process.argv[1]) === selfPath;
   }
 }
-if (labError) throw labError;
+
+if (await isMainModule()) {
+  const options = parse(process.argv.slice(2));
+  const { report } = await runLabContainer(options);
+  process.stdout.write(`Lab verdict: ${report.verdict}; contained: ${report.contained ? 'yes' : 'NO'}\n`);
+  if (!report.contained) process.exitCode = 1;
+}
 
 export { parse };

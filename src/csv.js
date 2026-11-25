@@ -70,3 +70,40 @@ export function parseCsv(source, options = {}) {
     return Object.fromEntries(headers.map((header, column) => [header, values[column]]));
   });
 }
+
+function escapeCsvCell(value) {
+  if (value === null || value === undefined) return '';
+  const text = String(value);
+  if (/[",\r\n]/.test(text)) {
+    return `"${text.replaceAll('"', '""')}"`;
+  }
+  return text;
+}
+
+export function stringifyCsv(headers, rows = []) {
+  if (!Array.isArray(headers) || headers.length === 0
+    || headers.some((header) => typeof header !== 'string' || header.length === 0)
+    || new Set(headers).size !== headers.length) {
+    throw new MvxError('CSV headers must be a non-empty array of unique non-empty strings', { code: 'INVALID_CSV' });
+  }
+  if (!Array.isArray(rows)) {
+    throw new MvxError('CSV rows must be an array', { code: 'INVALID_CSV' });
+  }
+  const lines = [headers.map(escapeCsvCell).join(',')];
+  for (let index = 0; index < rows.length; index += 1) {
+    const row = rows[index];
+    let values;
+    if (Array.isArray(row)) {
+      if (row.length !== headers.length) {
+        throw new MvxError(`CSV row ${index + 2} has ${row.length} columns; expected ${headers.length}`, { code: 'INVALID_CSV' });
+      }
+      values = row;
+    } else if (row && typeof row === 'object') {
+      values = headers.map((header) => (Object.hasOwn(row, header) ? row[header] : ''));
+    } else {
+      throw new MvxError(`CSV row ${index + 2} must be an array or object`, { code: 'INVALID_CSV' });
+    }
+    lines.push(values.map(escapeCsvCell).join(','));
+  }
+  return `${lines.join('\n')}\n`;
+}

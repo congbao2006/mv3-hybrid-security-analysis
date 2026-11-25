@@ -231,7 +231,8 @@ guide](docs/dnr-analysis.md), [declarative rule pack guide](docs/rule-packs.md),
 [disposition-policy guide](docs/disposition-policies.md),
 [audit-verification guide](docs/audit-verification.md),
 [comparison-verification guide](docs/comparison-verification.md),
-[packed comparison guide](docs/packed-comparison.md), and
+[packed comparison guide](docs/packed-comparison.md),
+[research CLI guide](docs/research-cli.md), and
 [methodology](docs/methodology.md).
 
 ## Synthetic corpus and real-world intelligence

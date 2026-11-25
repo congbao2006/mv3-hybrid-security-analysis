@@ -18,6 +18,7 @@ import { evaluateLabFiles, labReportToText, labVerificationToText, verifyLabRepo
 import { SEVERITIES } from './model.js';
 import { fetchSample, fetchSampleBatch, planSample, planSampleBatch, sampleBatchPlanToText, samplePlanToText } from './quarantine.js';
 import { auditToSarif, auditToText, comparisonToMarkdown } from './reporters.js';
+import { RESEARCH_HELP, runResearchCli } from './research/cli.js';
 import { loadRulePacks, rulePacksToText } from './rule-packs.js';
 import { VERSION } from './version.js';
 
@@ -81,6 +82,8 @@ Usage:
   mvx benchmark static <quarantine> --acknowledge-risk [--label label]
                        [--limit number] [--threshold severity] [--format text|json]
                        [--rule-pack file ...] [--require-valid-signature]
+  mvx research <validate|experiment|resume|stability|export|evaluate|inspect> [options]
+  mvx research --help
   mvx --help
 
 Exit codes:
@@ -163,8 +166,11 @@ async function isPackedAuditInput(inputPath) {
   }
 }
 
-export async function runCli(argv, streams = process) {
+export async function runCli(argv, streams = process, researchDeps = {}) {
   try {
+    if (argv[0] === 'research') {
+      return await runResearchCli(argv.slice(1), streams, researchDeps);
+    }
     const { positionals, options } = parseArgs(argv);
     if (options.version) {
       streams.stdout.write(`${VERSION}\n`);
@@ -741,4 +747,4 @@ export async function runCli(argv, streams = process) {
   }
 }
 
-export { HELP, VERSION };
+export { HELP, RESEARCH_HELP, VERSION };

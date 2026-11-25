@@ -58,24 +58,35 @@ export function hostPermissions(manifest) {
   return [...new Set([...explicit, ...legacy].filter((item) => typeof item === 'string'))].sort();
 }
 
+export const PERMISSION_RULE_IDS = Object.freeze([
+  'MVX101',
+  'MVX102',
+  'MVX103',
+  'MVX110',
+  'MVX111'
+]);
+
+export const NON_PERMISSION_MANIFEST_RULE_IDS = Object.freeze([
+  'MVX001',
+  'MVX104',
+  'MVX105',
+  'MVX106',
+  'MVX107',
+  'MVX108',
+  'MVX109',
+  'MVX112'
+]);
+
 function rule(id, title, severity, category, description, remediation, references, confidence) {
   return { id, title, severity, category, description, remediation, references, confidence };
 }
 
-export function analyzeManifest(manifest) {
+export function analyzePermissionRules(manifest) {
   const findings = [];
   const version = manifest.manifest_version;
   const permissions = permissionLists(manifest);
   const hosts = hostPermissions(manifest);
   const broadHosts = hosts.filter((host) => BROAD_HOST_PATTERNS.has(host));
-
-  if (![2, 3].includes(version)) {
-    findings.push(createFinding(rule(
-      'MVX001', 'Unsupported or missing manifest version', 'critical', 'compatibility',
-      'Chrome extension manifests must declare a supported manifest version.',
-      'Declare manifest_version 3. Use MV2 only in an isolated historical test environment.', [REFERENCES.mv3]
-    ), evidence('manifest_version', version)));
-  }
 
   if (broadHosts.length > 0) {
     findings.push(createFinding(rule(
@@ -101,6 +112,38 @@ export function analyzeManifest(manifest) {
       'The cookies permission combined with global host access can expose authentication material across many sites.',
       'Limit host access to the minimum set of origins and avoid transmitting cookie values.', [REFERENCES.privacy]
     ), [evidence('permissions', 'cookies'), evidence('host_permissions', broadHosts)]));
+  }
+
+  if (permissions.includes('webRequestBlocking')) {
+    findings.push(createFinding(rule(
+      'MVX110', 'Blocking webRequest capability', version === 3 ? 'critical' : 'high', 'network-control',
+      version === 3 ? 'webRequestBlocking is unavailable to most MV3 extensions.' : 'Blocking webRequest handlers can observe and modify traffic synchronously.',
+      'Use narrowly scoped declarativeNetRequest rules; policy-installed enterprise extensions are a documented exception.', [REFERENCES.webRequest, REFERENCES.dnr]
+    ), evidence('permissions', 'webRequestBlocking')));
+  }
+
+  const insecureHosts = hosts.filter((host) => host.startsWith('http://'));
+  if (insecureHosts.length > 0) {
+    findings.push(createFinding(rule(
+      'MVX111', 'Unencrypted host permission', 'medium', 'transport',
+      'HTTP host access permits data exchange over a transport vulnerable to network modification.',
+      'Use HTTPS-only host permissions outside an explicitly isolated localhost lab.', [REFERENCES.security]
+    ), evidence('host_permissions', insecureHosts)));
+  }
+
+  return findings;
+}
+
+export function analyzeNonPermissionManifestRules(manifest) {
+  const findings = [];
+  const version = manifest.manifest_version;
+
+  if (![2, 3].includes(version)) {
+    findings.push(createFinding(rule(
+      'MVX001', 'Unsupported or missing manifest version', 'critical', 'compatibility',
+      'Chrome extension manifests must declare a supported manifest version.',
+      'Declare manifest_version 3. Use MV2 only in an isolated historical test environment.', [REFERENCES.mv3]
+    ), evidence('manifest_version', version)));
   }
 
   const contentScripts = Array.isArray(manifest.content_scripts) ? manifest.content_scripts : [];
@@ -163,23 +206,6 @@ export function analyzeManifest(manifest) {
     ), evidence('web_accessible_resources', resources)));
   }
 
-  if (permissions.includes('webRequestBlocking')) {
-    findings.push(createFinding(rule(
-      'MVX110', 'Blocking webRequest capability', version === 3 ? 'critical' : 'high', 'network-control',
-      version === 3 ? 'webRequestBlocking is unavailable to most MV3 extensions.' : 'Blocking webRequest handlers can observe and modify traffic synchronously.',
-      'Use narrowly scoped declarativeNetRequest rules; policy-installed enterprise extensions are a documented exception.', [REFERENCES.webRequest, REFERENCES.dnr]
-    ), evidence('permissions', 'webRequestBlocking')));
-  }
-
-  const insecureHosts = hosts.filter((host) => host.startsWith('http://'));
-  if (insecureHosts.length > 0) {
-    findings.push(createFinding(rule(
-      'MVX111', 'Unencrypted host permission', 'medium', 'transport',
-      'HTTP host access permits data exchange over a transport vulnerable to network modification.',
-      'Use HTTPS-only host permissions outside an explicitly isolated localhost lab.', [REFERENCES.security]
-    ), evidence('host_permissions', insecureHosts)));
-  }
-
   if (version === 3 && manifest.background?.scripts) {
     findings.push(createFinding(rule(
       'MVX112', 'MV2 background scripts declared in MV3', 'high', 'compatibility',
@@ -189,4 +215,16 @@ export function analyzeManifest(manifest) {
   }
 
   return findings;
+}
+
+export function analyzeManifest(manifest) {
+  const permissionFindings = analyzePermissionRules(manifest);
+  const nonPermissionFindings = analyzeNonPermissionManifestRules(manifest);
+  return [
+    ...nonPermissionFindings.filter((finding) => finding.id === 'MVX001'),
+    ...permissionFindings.filter((finding) => finding.id === 'MVX101' || finding.id === 'MVX102' || finding.id === 'MVX103'),
+    ...nonPermissionFindings.filter((finding) => finding.id !== 'MVX001' && finding.id !== 'MVX112'),
+    ...permissionFindings.filter((finding) => finding.id === 'MVX110' || finding.id === 'MVX111'),
+    ...nonPermissionFindings.filter((finding) => finding.id === 'MVX112')
+  ];
 }
