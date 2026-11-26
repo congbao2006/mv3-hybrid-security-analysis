@@ -1,0 +1,847 @@
+{
+  "collectedAt": "2026-11-26T01:32:56.095Z",
+  "totalVerifiedSelected": 60,
+  "totalExcluded": 104,
+  "excludedByReason": {
+    "download_failed": 14,
+    "ENCODED_PAYLOAD_LIMIT": 29,
+    "SCAN_LIMIT": 6,
+    "ARCHIVE_LIMIT": 2,
+    "INVALID_INPUT": 7,
+    "dl_failed": 46
+  },
+  "excluded": [
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "ddkjgahefchbfgdjcdijieeafameaaof",
+      "name": "uBlock Origin Lite",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "nngceckbapebfimnlniiiahkandclblb",
+      "name": "Bitwarden Password Manager",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "lmhkpmbekcpmknkliojefcpmmfjjkjhl",
+      "name": "Redux DevTools",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "clngdbkpkpeebahjckkjfaddafhnmfee",
+      "name": "Stylus",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "aeblfdkhhhdcdjpifhhbdiojplfjncoa",
+      "name": "1Password - Password Manager",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "nkbihfbeogaeaoehlefnkodbefgpgknn",
+      "name": "MetaMask",
+      "status": "inspect_failed",
+      "errorCode": "SCAN_LIMIT",
+      "error": "Scannable source exceeds 50000000 bytes"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "ekhagklcjbdpajgpjgmbionohldbjgcg",
+      "name": "Zotero Connector",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "bgnkhhnnamicmpeenaelnjfhikgbkllg",
+      "name": "AdGuard AdBlocker",
+      "status": "inspect_failed",
+      "errorCode": "SCAN_LIMIT",
+      "error": "Source file filters/declarative/ruleset_2/ruleset_2.json exceeds 10000000 bytes"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "mlomiejdfkolichcflejclcbmpeaniij",
+      "name": "Ghostery Tracker & Ad Blocker",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "bkdgflcldnnnapblkhphbgpggdiikppg",
+      "name": "DuckDuckGo Privacy Essentials",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "nhdogjmejiglipccpnnnanhbledajbpd",
+      "name": "Vue.js devtools",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "aapbdbdomjkkjkaonfhkkikfgjllcleb",
+      "name": "Google Translate",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "kbfnbcaeplbcioakkpcpgfkobkghlhen",
+      "name": "Grammarly",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "gppongmhjkpfnbhagpmjfkannfbllamg",
+      "name": "Wappalyzer - Technology profiler",
+      "status": "inspect_failed",
+      "errorCode": "ARCHIVE_LIMIT",
+      "error": "Archive exceeds 10000 entries"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "bjfhmglciegochdpefhhlphglcehbmek",
+      "name": "Hypothesis - Web & PDF Annotation",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "mpiodijhokgodhhofbcjdecpffjipkle",
+      "name": "SingleFile",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "mhanhkphfcgbjhjlfnmbckpgcfckgllc",
+      "name": "Consent-O-Matic",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "dhdgffkkebhmkfjojejmpbldmpobfkfo",
+      "name": "Tampermonkey",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "lhdoppojpmngadmnindnejefpokejbdd",
+      "name": "axe DevTools - Web Accessibility Testing",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "kkkjlfcfejeffbjgaphccamfohaccdao",
+      "name": "Octotree - GitHub code tree",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "ghmbeldphafepmbegfdlkpapadhbakde",
+      "name": "Proton Pass: Free Password Manager",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "jldplkjfkkhhienjeclmmnddeldnfkhj",
+      "name": "Todoist for Chrome",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "knheggckgoihihmjckicgaicbnmhlglg",
+      "name": "Notion Web Clipper",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "laookkfknpbbblfpciffpaejjkokdgca",
+      "name": "Momentum",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "oldceeleldhonbafppcapldpdifcinji",
+      "name": "LanguageTool",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "cofdbpoegempjloogbagkncekinflcnj",
+      "name": "DeepL: translate and write with AI",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "iplffkdpngmdjhlpjmppncnlhomiipha",
+      "name": "Unpaywall",
+      "status": "inspect_failed",
+      "errorCode": "INVALID_INPUT",
+      "error": "External XML DTD subsets are outside the static analysis profile"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "gebbhagfogifgggkklgodflipbcdfgdl",
+      "name": "Return YouTube Dislike",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "ponfpcnoihfmfllchgbdpjlkdkjbpnjh",
+      "name": "Enhancer for YouTube",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "bcjindagcaagfpfdjjjoifapioififch",
+      "name": "JSON Formatter",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "ienfalfjdbdpebioblfackkekamfgbhd",
+      "name": "Angular DevTools",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "ckblmgbagchijcbkkjbpelafkoklkbgi",
+      "name": "Svelte Devtools",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 404 error-unknownApplication"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "hdokiejnpimakedhajhdlcegeplioahd",
+      "name": "LastPass: Free Password Manager",
+      "status": "inspect_failed",
+      "errorCode": "SCAN_LIMIT",
+      "error": "Scannable source exceeds 50000000 bytes"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "fdjamakpfbbddfjaooikfcpapjohcfmg",
+      "name": "Dashlane - Password Manager",
+      "status": "inspect_failed",
+      "errorCode": "SCAN_LIMIT",
+      "error": "Scannable source exceeds 50000000 bytes"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "niloccemoadcdkdjlinkgdfekeahmflj",
+      "name": "Save to Pocket",
+      "status": "download_failed",
+      "errorCode": null,
+      "error": "HTTP 204 No Content"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "liecbddmkiiihnedobmlmillhodjkdmb",
+      "name": "Loom - Screen Recorder & Screen Capture",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "nlipoenfbbikpbjkfpfillcgkoblgpmj",
+      "name": "Awesome Screen Recorder & Screenshot",
+      "status": "inspect_failed",
+      "errorCode": "INVALID_INPUT",
+      "error": "External XML DTD subsets are outside the static analysis profile"
+    },
+    {
+      "sourceBatch": "initial-60",
+      "extensionId": "gighmmpiobklfepjocnamgkkbiglidom",
+      "name": "AdBlock - block ads across the web",
+      "status": "inspect_failed",
+      "errorCode": "ARCHIVE_LIMIT",
+      "error": "Archive expands beyond 250000000 bytes"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "ddkjiahejlhfcafbddmgiahcphecmpfh",
+      "name": "uBlock Origin Lite",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "mdjildafknihdffflflebgpfflgfdhpj",
+      "name": "Consent-O-Matic",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "bcjindcccaagfpapjjmaifapmmgkifgo",
+      "name": "JSON Formatter",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "kkkjlfejcbglilgjnpjcdplplpcgeaej",
+      "name": "Octotree",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "lmhkpmbekcpmknkliojdfcpmpmjjgjhl",
+      "name": "Redux DevTools",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "ienfalfjdbdpebioblfackkekamfgbnh",
+      "name": "Angular DevTools",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "acmacodkjbdgmoleebolmdjonilkdbch",
+      "name": "Svelte DevTools",
+      "status": "inspect_failed",
+      "errorCode": "SCAN_LIMIT",
+      "error": "Source file background.js exceeds 10000000 bytes"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "ponfpcnoihfmfllmllchgbfckhlkjelp",
+      "name": "Enhancer for YouTube",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "jldplgffpilcmpijpkenahmbmlcifcjo",
+      "name": "Todoist for Chrome",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "knheggckgoihghilkjieijimedfcglhn",
+      "name": "Notion Web Clipper",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "idgpnmonknjnojaddfkpjkljifpfnlnm",
+      "name": "ModHeader",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "djflhoibgkdhgjhonkkjipapoacdcdin",
+      "name": "User-Agent Switcher for Chrome",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "edacconmaakjimmfgnblocblbcdcpbko",
+      "name": "Session Buddy",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "oeopbcgkkoapgobdbedjmjljakhibfnm",
+      "name": "Checker Plus for Gmail",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "djcfdncoceejjhanhdhmimficlgjknje",
+      "name": "High Contrast",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "fheoggkfdfchfphceeifdbepaooicjam",
+      "name": "VisBug / Extension",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "gbgohdfcgjkcbiopmjbdafpjcfokecbp",
+      "name": "Pesticide",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "ggfgijbpiheegefhppanhhkabjeffcgc",
+      "name": "CSSViewer",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "jbfeongihppeenfnaofmdeikahaefljd",
+      "name": "Manganum",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "jjhefcfhmnkpeddbkakobjjkbdbjbcec",
+      "name": "Readwise Highlighter",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "clhkkbfkfbimjdjfhopahalmjackklei",
+      "name": "Instapaper",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "hipbfijkanficphgaicjghmblmcklhdk",
+      "name": "Feedly Mini",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "mdnleldcmiljblolnjhpnblkcekpdkpa",
+      "name": "Requestly",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "aejoelaoggembcahagimdiliamlcdmfm",
+      "name": "Talend API Tester",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "jlmafbaeoofdegohdhinkhilhclaklkp",
+      "name": "OctoLinker",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "dgjhodhbiafihggbjepjpclpcbjiphhd",
+      "name": "Sourcegraph for GitHub",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "jnbbnfkeekjgfalepgeajeafhhdmjlin",
+      "name": "WakaTime",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "jlmpghadkjchfncdjejohhipmlfcghma",
+      "name": "Daily.dev",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "laankejkbhbdhmipfmgcngdelahlfoji",
+      "name": "StayFocusd",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "kjacjjdnoddnpbbcjilcajfhhbdhkpgk",
+      "name": "Forest",
+      "status": "inspect_failed",
+      "errorCode": "INVALID_INPUT",
+      "error": "External XML DTD subsets are outside the static analysis profile"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "lojgmehidjdhhbmpjfamhpkpodfcodef",
+      "name": "Marinara Pomodoro Assistant",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "oknpjjbmpnndlpmnhmekjpocelpnlfdi",
+      "name": "Mercury / Postlight Reader",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "bifmfjgpgndemajpeeoiopbeilbaifdo",
+      "name": "Reader View",
+      "status": "inspect_failed",
+      "errorCode": "INVALID_INPUT",
+      "error": "External XML DTD subsets are outside the static analysis profile"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "ohlencieiipommannpdfcmfdpjjmeolj",
+      "name": "PrintFriendly & PDF",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "bpconcjcammlapcogcnnelfmaeghhagj",
+      "name": "Nimbus Screenshot",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "mcbpblocgmgfnpjjppndjkmjgaogfceg",
+      "name": "FireShot",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "nlbjncdgkicafpngihllcfdfkajijglj",
+      "name": "RSS Subscription Extension",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "kgjfgplpablkjnlkjmjgcgofmnimbhmf",
+      "name": "Zoom Scheduler",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "fgphabkkdkcobkbfjgpigifccjhephcg",
+      "name": "Calendly",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "pmjejejhjgpjgbipjhjanljjiibmpbab",
+      "name": "Clockify Time Tracker",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "oejgccbfbmkkfhphhiaccdpjeoedangc",
+      "name": "Toggl Track",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "fmkmmnkmagjfpiplfajidhmbbkpkhifp",
+      "name": "Mendeley Web Importer",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-1",
+      "extensionId": "bjfjfompaeihackjfhjigbbpadndgmmb",
+      "name": "ClearURLs2",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "kgejglhpjiefppelpmljglcjbhoiplfn",
+      "name": "Screen Reader (ChromeVox)",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "pjnfggphgdjblhfjaphkjhfpiiekbbej",
+      "name": "Google Similar Pages",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "gbmdgpbipfallnflgajpaliibnhdgobh",
+      "name": "JSON Viewer",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "fpnmgdkabkmnadcjpehmlllkndpkmiak",
+      "name": "Wayback Machine",
+      "status": "inspect_failed",
+      "errorCode": "INVALID_INPUT",
+      "error": "External XML DTD subsets are outside the static analysis profile"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "lkoeejijapdihgbegpljiehpnlkadljb",
+      "name": "LibKey Nomad",
+      "status": "inspect_failed",
+      "errorCode": "INVALID_INPUT",
+      "error": "External XML DTD subsets are outside the static analysis profile"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "pncfbmialoiaghdehhbnbhkkgmjanfhe",
+      "name": "uBlacklist",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "mpbjkejclgfgadiemmefgebjfooflfhl",
+      "name": "Buster: Captcha Solver for Humans",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "aefehdhdciieocakfobpaaolhipkcpgc",
+      "name": "Simple Allow Copy",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "pnjaodmkngahhkoihejjehlcdlnponle",
+      "name": "RSS Feed Reader (Feeder)",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "ocgpenflpmgnfapjedencafcfakcekcd",
+      "name": "Redirector",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "kkelicaakdanhinjdeammmilcgefonfh",
+      "name": "Window Resizer",
+      "status": "inspect_failed",
+      "errorCode": "INVALID_INPUT",
+      "error": "External XML DTD subsets are outside the static analysis profile"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "fihnjjcciajhdojfnbdkdfaoknhalnja",
+      "name": "I don't care about cookies",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "cgihflhdpokeobcfimliamffejfnmfii",
+      "name": "APK Downloader / Utility",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "efaidnbmnnnibpcajpcglclefindmkaj",
+      "name": "Adobe Acrobat: PDF edit, convert, sign tools",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "XML attributes exceed 16384"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "hdokiejnpimakedhajhdlcegeplioahd",
+      "name": "LastPass",
+      "status": "inspect_failed",
+      "errorCode": "SCAN_LIMIT",
+      "error": "Scannable source exceeds 50000000 bytes"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "gcbommkclmclpchllfjekcdonpmejbdp",
+      "name": "HTTPS Everywhere",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-2",
+      "extensionId": "cjpalhdlnbpafiamejdnhcphjbkeiagm",
+      "name": "uBlock Origin",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-3",
+      "extensionId": "ckkdlimhmcjmikdlpkmbgfkaikojcbjk",
+      "name": "Markdown Viewer",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    },
+    {
+      "sourceBatch": "pool-3",
+      "extensionId": "eggkanocgddhmflfnlphkkachjkfdlbh",
+      "name": "Tabs Outliner",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-3",
+      "extensionId": "jpfpebmajhhopeonhlcgidhclcccjcik",
+      "name": "Speed Dial 2 New Tab",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "XML attributes exceed 16384"
+    },
+    {
+      "sourceBatch": "pool-3",
+      "extensionId": "immpkjjlgappgfkkfieppnmlhakdmaab",
+      "name": "Imagus",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 204"
+    },
+    {
+      "sourceBatch": "pool-3",
+      "extensionId": "eljmjmgjipohfelikgielfmmbfkjjdci",
+      "name": "DeArrow",
+      "status": "dl_failed",
+      "errorCode": null,
+      "error": "HTTP 404"
+    },
+    {
+      "sourceBatch": "pool-3",
+      "extensionId": "iebpjdmgckacbodjpijphcplhebcmeop",
+      "name": "Table Capture",
+      "status": "inspect_failed",
+      "errorCode": "ENCODED_PAYLOAD_LIMIT",
+      "error": "ECMAScript tokens exceed 1000000"
+    }
+  ]
+}
