@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "configVersion": "2026.1-frozen-alpha03",
+  "formula": "C-2",
+  "scoreCap": 100,
+  "staticBlendAlpha": 0.3,
+  "confidenceMultipliers": {
+    "high": 1.0,
+    "medium": 0.7,
+    "low": 0.4
+  },
+  "deduplicateMvx103Chain": true,
+  "tierABehavioralFloor": 90,
+  "tierBDynamicElevation": 35,
+  "tierBEscalatesWithExternalNetwork": true,
+  "suspiciousDynamicElevation": 20,
+  "requireExtensionInitiatorForSuspicious": true,
+  "corroboration": {
+    "primaryCategoryBonus": 12,
+    "t04ConditionalBonus": 5,
+    "maxBonus": 20
+  },
+  "allowStaticFallbackOnExecutionFailure": true,
+  "riskTierThresholds": {
+    "critical": 70,
+    "high": 40,
+    "medium": 20
+  },
+  "researchNotice": "Pre-registered frozen M4 hybrid fusion configuration (staticBlendAlpha=0.3) for the 150-sample MV3 empirical study; risk scores (0-100) represent bounded indicator rankings, not malware probabilities."
+}

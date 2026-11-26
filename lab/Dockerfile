@@ -1,6 +1,6 @@
 FROM node:22-bookworm-slim@sha256:6c74791e557ce11fc957704f6d4fe134a7bc8d6f5ca4403205b2966bd488f6b3
 
-ARG CHROMIUM_VERSION=150.0.7871.181-1~deb12u1
+ARG CHROMIUM_VERSION=156.0.8078.108-1~deb12u1
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends chromium="${CHROMIUM_VERSION}" ca-certificates \
